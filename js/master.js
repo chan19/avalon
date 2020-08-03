@@ -29,7 +29,7 @@ MASTER = (function() {
 			PlayerManager.markDecider(this.getRound().decider);
 			PlayerManager.markLeader(this.getRound().leader);
 			PlayerManager.displayMyRole(this.getMyId());
-			MissionManager.updateMisstionTableUi(this.getPlayers());
+			MissionManager.updateMissionTableUi(this.getPlayers(), this.service.getMissionData());
 		
         },
         setRole: function(s) {
