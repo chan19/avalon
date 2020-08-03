@@ -28,12 +28,12 @@ body {
 
 #controlArea {
     /* position: fixed; */
-    margin: 10px 25px 0;
+    margin: 4px 12px 0;
     background: #2196F3;
     /* border: 1px solid grey; */
     display: inline-block;
-    box-shadow: -1px 1px 5px 2px #c1c1c1;
-    background: white;
+    /* box-shadow: -1px 1px 5px 2px #c1c1c1; */
+    background: #ffffff00;
     border-radius: 4px;
 }
 
@@ -41,12 +41,12 @@ body {
 }
 
 .controlbutton {
-    height: 40px;
+    height: 30px;
     font-size: 15px;
     width: 120px;
     text-align: center;
     text-transform: uppercase;
-    padding: 0px 15px;
+    padding: 0px 14px;
     margin: 4px 10px;
     cursor: pointer;
     BORDER: none;
@@ -60,7 +60,7 @@ body {
     display: inline-block;
     margin: 4px 100px 4px 4px;
     font-size: medium;
-    color: #607D8B;
+    color: #171717;
 }
 
 .controlbutton:hover {
