@@ -1,0 +1,100 @@
+.player {
+    display: inline-block;
+    margin: 10px 10px;
+    background: #fbfbfb;
+    padding: 20px 25px;
+    position: relative;
+    border: 1px solid #cecece;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #3F51B5;
+    transition: 150ms linear transform;
+    background: white;
+    box-shadow: 1px 1px 6px 0px #ababab;
+}
+
+.player:hover, .player.isActive {
+    background: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+.player:hover {
+    transform: scale(1.1)
+}
+
+.player .playerRoleIcon {
+    height: 60px;
+    width: 60px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 1;
+}
+
+.player.roleresistance .playerRoleIcon {
+    background-image: url(../icons/resistance.png);
+}
+
+.player.rolespy .playerRoleIcon {
+    background-image: url(../icons/spy.png);
+}
+
+.player.rolemerlin .playerRoleIcon {
+    background-image: url(../icons/merlin.png);
+}
+.player.roleperceival .playerRoleIcon {
+    background-image: url(../icons/perceival.png);
+}
+.player .playerName {
+    text-align: center;
+    font-weight: 400;
+    cursor: pointer;
+    margin-top: 12px;
+    font-size: medium;
+}
+.player .roleText{   
+	text-align: center;
+    font-size: small;
+    color: #9E9E9E;
+    position: absolute;
+    text-transform: lowercase;
+    left: 0;
+    width: 100%;
+}
+.player.isActive .roleText, .player:hover .roleText{
+	color: #FFEB3B;
+}
+.player .deciderIcon {
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    background-image: url(../icons/decider.png);
+    display: none;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    top: -12px;
+    left: 42px;
+    top: 5px;
+    left: 5px;
+}
+
+.player .leaderIcon {
+    display: none;
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    background-image: url(../icons/leader.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    top: -12px;
+    left: 42px;
+    top: 5px;
+    left: 5px;
+}
+
+.player.isLeader .leaderIcon, .player.isDecider .deciderIcon {
+    display: block;
+}

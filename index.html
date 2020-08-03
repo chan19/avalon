@@ -1,0 +1,52 @@
+<html>
+	<head>
+		<script src='js/jquery.js'></script>
+		<script src='js/player.js'></script>
+		<script src='js/playerManager.js'></script>
+		<script src='js/missionManager.js'></script>
+		<script src='js/service.js'></script>
+		<script src='js/master.js'></script>
+		<link href='css/main.css' rel='stylesheet'></link>
+		<link href='css/player.css' rel='stylesheet'></link>
+		<link href='css/mission.css' rel='stylesheet'></link>
+		<script>
+		var ROLE_CONFIG = ["RESISTANCE", "MERLIN", "SPY", "PERCEIVAL", "MORGANA", "TRISTON", "ISOLDE"];
+			jQuery(document).ready(function(){
+				MASTER.init();
+			
+			});
+		
+		</script>
+	</head>
+	<body>
+		<div id='header'><div class='title'>AVALON</div> <button class='controlbutton' id='pick'>NEW GAME</button></div>
+		
+		<div id='arena'></div>
+		<div id='myRole'>
+		
+		</div>
+		<div id='controlArea'>
+			<div id='pickControl' class='controlPane'>
+				<button class='controlbutton' id='pick'>PICK</button> <div class='controlLabel'> Your turn to pick </div>
+			</div>
+			<div id='missionControl' class='controlPane' style='display:none'>
+				<button class='controlbutton controlbuttonPositive' id='succeed'>SUCCEED</button>
+				<button class='controlbutton controlbuttonNegative' id='fail'>FAIL</button>
+			</div>
+			<div id='voteControl' class='controlPane' style='display:none'>
+				<button class='controlbutton controlbuttonPositive' id='approve'>APPROVE</button>
+				<button class='controlbutton controlbuttonNegative' id='reject'>REJECT</button>
+			</div>
+		</div>
+		<div id='voteArea'>
+		
+			<div id='missionTable'>
+			</div>
+			
+		</div>
+		<div id='rolesArea'>
+			
+		</div>
+	</body>
+
+</html>
