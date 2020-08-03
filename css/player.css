@@ -7,7 +7,7 @@
     border: 1px solid #cecece;
     border-radius: 10px;
     cursor: pointer;
-    color: #3F51B5;
+    color: #484848;
     transition: 150ms linear transform;
     background: white;
     box-shadow: 1px 1px 6px 0px #ababab;
@@ -43,9 +43,11 @@
 .player.rolemerlin .playerRoleIcon {
     background-image: url(../icons/merlin.png);
 }
+
 .player.roleperceival .playerRoleIcon {
     background-image: url(../icons/perceival.png);
 }
+
 .player .playerName {
     text-align: center;
     font-weight: 400;
@@ -53,18 +55,21 @@
     margin-top: 12px;
     font-size: medium;
 }
-.player .roleText{   
-	text-align: center;
+
+.player .roleText {
+    text-align: center;
     font-size: small;
-    color: #9E9E9E;
+    color: #2196F3;
     position: absolute;
     text-transform: lowercase;
     left: 0;
     width: 100%;
 }
-.player.isActive .roleText, .player:hover .roleText{
-	color: #FFEB3B;
+
+.player.isActive .roleText, .player:hover .roleText {
+    color: #FFEB3B;
 }
+
 .player .deciderIcon {
     position: absolute;
     height: 25px;

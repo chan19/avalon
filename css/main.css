@@ -105,6 +105,8 @@ body {
     left: 25px;
     font-family: monospace;
     /* text-decoration: underline; */
+    color: #FFEB3B;
+    line-height: 50px;
 }
 
 #header .controlbutton {
