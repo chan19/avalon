@@ -8,12 +8,12 @@ body {
 #header {
     height: 50px;
     width: 100%;
-    /* background: #673AB7; */
+    background: #673AB7;
     /* box-shadow: 0px 0px 5px 0px black; */
     z-index: 3;
     text-align: center;
-    color: #1c8fea;
-    font-size: 25px;
+    color: #ffffff;
+    font-size: large;
     line-height: 45px;
 }
 
@@ -99,7 +99,7 @@ body {
 
 .title {
     display: inline-block;
-    font-size: 20px;
+    font-size: 30px;
     text-transform: lowercase;
     position: absolute;
     left: 25px;
@@ -112,7 +112,8 @@ body {
     right: 10px;
     top: 8px;
     margin: 0;
-    height: 35px;
-    background: #2196F3;
+    height: 30px;
+    background: #4CAF50;
     color: white;
+    font-size: 12px;
 }
