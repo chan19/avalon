@@ -8,15 +8,20 @@ body {
 #header {
     height: 50px;
     width: 100%;
-    background: #673AB7;
-    /* box-shadow: 0px 0px 5px 0px black; */
+    background: #03A9F4;
+    box-shadow: 0px 0px 5px 2px #b7b7b7;
     z-index: 3;
-    text-align: center;
+    /* text-align: center; */
     color: #ffffff;
     font-size: large;
     line-height: 45px;
 }
-
+#header .headericon{
+	height: 35px;
+	width: 35px;
+	margin: 8px 2px 7px 25px;
+	display: inline-block;
+}
 #arena {
     /* background: white; */
     margin: 2px 10px 12px;
@@ -55,7 +60,7 @@ body {
     background: #2196F3;
     color: #ffffff;
     transition: 100ms linear all;
-    opacity:0.5;
+    opacity: 0.5;
     cursor: not-allowed;
 }
 
@@ -65,12 +70,14 @@ body {
     font-size: medium;
     color: #171717;
 }
+
 .infoTextLabel {
     display: inline-block;
     margin: 3px 2px 0px 8px;
     font-size: small;
     color: #171717;
 }
+
 .infoTextContent {
     display: inline-block;
     margin: 4px 10px 4px 4px;
@@ -78,10 +85,12 @@ body {
     color: #505050;
     font-weight: bold;
 }
-.controlbutton.enable{
-	opacity:1;
-	cursor:pointer;
+
+.controlbutton.enable {
+    opacity: 1;
+    cursor: pointer;
 }
+
 .controlbutton.enable:hover {
     transform: scale(1.1);
 }
@@ -119,15 +128,15 @@ body {
 }
 
 .title {
-    display: inline-block;
-    font-size: 30px;
+    display: none;
+    font-size: 20px;
     text-transform: lowercase;
-    position: absolute;
-    left: 25px;
-    font-family: monospace;
+    /* font-family: Coronet script, sans-serif; */
     /* text-decoration: underline; */
-    color: #FFEB3B;
-    line-height: 50px;
+    color: #ffffff;
+    line-height: 62px;
+    vertical-align: top;
+    font-weight: lighter;
 }
 
 #header .controlbutton {
@@ -136,7 +145,7 @@ body {
     top: 8px;
     margin: 0;
     height: 30px;
-    background: #4CAF50;
-    color: white;
+    background: #ffffff;
+    color: #4e4e4e;
     font-size: 12px;
 }

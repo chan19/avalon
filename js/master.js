@@ -112,8 +112,11 @@ MASTER = (function() {
 		},
 		_attachEvents: function(){
 			var that = this;
-			jQuery("#pick").click(function(){
-				that.onPick();
+			var pickButton = jQuery("#pick");
+			pickButton.click(function(){
+				if(pickButton.hasClass("enable")){
+					that.onPick();
+				}
 			});
 			jQuery("#succeed").on("click", function(){
 				
