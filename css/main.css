@@ -16,12 +16,14 @@ body {
     font-size: large;
     line-height: 45px;
 }
-#header .headericon{
-	height: 35px;
-	width: 35px;
-	margin: 8px 2px 7px 25px;
-	display: inline-block;
+
+#header .headericon {
+    height: 35px;
+    width: 35px;
+    margin: 8px 2px 7px 25px;
+    display: inline-block;
 }
+
 #arena {
     /* background: white; */
     margin: 2px 10px 12px;
@@ -59,9 +61,26 @@ body {
     BORDER-RADIUS: 4PX;
     background: #2196F3;
     color: #ffffff;
+    cursor: pointer;
     transition: 100ms linear all;
+    transform: scale(1.1);
+}
+
+.controlbutton:focus {
+    outline: none;
+}
+
+.controlbutton.disable {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+.controlbutton:hover {
+    transform: scale(1.1);
+}
+
+.controlbutton.disable:hover {
+    transform: unset;
 }
 
 .controlLabel {
@@ -73,7 +92,7 @@ body {
 
 .infoTextLabel {
     display: inline-block;
-    margin: 3px 2px 0px 8px;
+    margin: 3px 2px 0px 2px;
     font-size: small;
     color: #171717;
 }
@@ -86,21 +105,12 @@ body {
     font-weight: bold;
 }
 
-.controlbutton.enable {
-    opacity: 1;
-    cursor: pointer;
-}
-
-.controlbutton.enable:hover {
-    transform: scale(1.1);
-}
-
 .controlbutton.controlbuttonNegative {
-    background: #F44336;
+    background: #E91E63;
 }
 
 .controlbutton.controlbuttonPositive {
-    background: #4CAF50;
+    background: #009688;
 }
 
 #pickControl {
@@ -113,10 +123,8 @@ body {
 }
 
 #controlArea .controlPane {
-    /* width: 400px; */
-    /* left: 0; */
-    /* right: 0; */
-    /* margin: auto; */
+    line-height: 30px;
+    margin-left: 150px;
 }
 
 #voteArea {
@@ -148,4 +156,9 @@ body {
     background: #ffffff;
     color: #4e4e4e;
     font-size: 12px;
+}
+.busyIndicator{
+	display: inline-block;
+	height: 40px;
+	vertical-align: middle;
 }

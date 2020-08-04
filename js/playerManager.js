@@ -37,6 +37,16 @@ PlayerManager = (function() {
 				}
 			}
 		},
+		setTeam: function(aId){
+			var that = this;
+			this.resetTeam();
+			this._playerNodes.forEach(function(o){
+				if(aId.indexOf(o.getId()) > -1){
+					o.setIsActive(true);
+					that._team.push(o);
+				}
+			});
+		},
 		removeFromTeam: function(a){
 			var i = this._team.indexOf(a);
 			this._team.splice(i,1);
@@ -54,10 +64,6 @@ PlayerManager = (function() {
 		},
 		getTeam: function(){
 			return this._team;
-		},
-		setTeam: function(aTeam){
-			this.resetTeam();
-			this._team = aTeam;
 		},
 		getTeamData: function(){
 			var a =[];

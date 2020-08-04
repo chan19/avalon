@@ -31,18 +31,25 @@
 		
 		</div>
 		<div id='controlArea'>
-			<div id='pickControl' class='controlPane'>
-				<button class='controlbutton' id='pick'>PICK</button> <div class='controlLabel'> Your turn to pick </div>
+			<div id='pickControl' class='controlPane' style='display:none'>
+				<div class='infoTextLabel'> Your turn to pick</div>
+				<div class ='infoTextContent'></div>
+				<button class='controlbutton disable' id='pick'>PICK</button>
 			</div>
 			<div id='missionControl' class='controlPane' style='display:none'>
 				<button class='controlbutton controlbuttonPositive' id='succeed'>SUCCEED</button>
 				<button class='controlbutton controlbuttonNegative' id='fail'>FAIL</button>
 			</div>
 			<div id='voteControl' class='controlPane' style='display:none'>
+				<div class='infoTextLabel'> Team proposed</div>
+				<div class ='infoTextContent'></div>
 				<button class='controlbutton controlbuttonPositive' id='approve'>APPROVE</button>
 				<button class='controlbutton controlbuttonNegative' id='reject'>REJECT</button>
 			</div>
 			<div id='infoControl' class='controlPane infoPane' style='display:none'>
+				<img class='busyIndicator' src='icons/busy.gif'/>
+				<div class='infoTextLabel'>Waiting for the team proposal of </div>
+				<div class ='infoTextContent'></div>
 			</div>
 		</div>
 		<div id='voteArea'>

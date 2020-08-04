@@ -16,6 +16,12 @@ MissionManager = (function(){
 		setIsTeamSelected: function(){
 			
 		},
+		addMission: function(aRound){
+			
+		},
+		setMissionState: function(){
+			
+		},
 		updateMissionTableUi: function(aPlayers, aMission){
 			var html = "";
 			var oRound;
@@ -31,7 +37,7 @@ MissionManager = (function(){
 				tmpHtml = "";
 				missionStatusClass = (aMission[i].state == -1) ? "" : (aMission[i].state == 0) ? " missionFail" : " missionSuccess";
 				missionColHtml += "<div class='col" + (i+1) + " column'><div class='headerCell cell " + missionStatusClass + 
-								"'>MISSION "+(i+1) + "</div><div class='missionContainer columnContainer'>";
+								"'>MISSION "+(i+1) + " (" + aMission[i].limit +") "+ "</div><div class='missionContainer columnContainer'>";
 				for(var j =0; j< aMission[i].rounds.length; j++){
 					tmpHtml = "";
 					missionColHtml += "<div class='roundcontainer'>";
