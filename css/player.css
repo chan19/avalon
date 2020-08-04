@@ -8,12 +8,12 @@
     border-radius: 10px;
     cursor: pointer;
     color: #484848;
-    transition: 150ms linear transform;
+    transition: 200ms linear transform;
     background: white;
     box-shadow: 1px 1px 6px 0px #ababab;
 }
 
-.player:hover, .player.isActive {
+.player.isActive{
     background: #4CAF50;
     color: white;
     border: 1px solid #4CAF50;
@@ -67,7 +67,7 @@
     width: 100%;
 }
 
-.player.isActive .roleText, .player:hover .roleText {
+.player.isActive .roleText{
     color: #FFEB3B;
 }
 

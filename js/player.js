@@ -72,7 +72,7 @@ Player.prototype = {
 	},
     _attachEvents: function() {
 		var that = this;
-		this._node.on("click", function(){
+		this._node.on("mousedown", function(){
 			that.toggleIsActive();
 			that._onPress();
 		});
