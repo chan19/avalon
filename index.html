@@ -1,5 +1,10 @@
+<!DOCTYPE html>
 <html>
-	<head>
+    <head>
+        <title>Avalon</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="No room for error">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src='js/jquery.js'></script>
 		<script src='js/player.js'></script>
 		<script src='js/playerManager.js'></script>
@@ -19,7 +24,7 @@
 		</script>
 	</head>
 	<body>
-		<div id='header'><div class='title'>AVALON</div> <button class='controlbutton' id='pick'>NEW GAME</button></div>
+		<div id='header'><div class='title'>AVALON</div> <button class='controlbutton enable' id='newgame'>NEW GAME</button></div>
 		
 		<div id='arena'></div>
 		<div id='myRole'>
@@ -36,6 +41,8 @@
 			<div id='voteControl' class='controlPane' style='display:none'>
 				<button class='controlbutton controlbuttonPositive' id='approve'>APPROVE</button>
 				<button class='controlbutton controlbuttonNegative' id='reject'>REJECT</button>
+			</div>
+			<div id='infoControl' class='controlPane infoPane' style='display:none'>
 			</div>
 		</div>
 		<div id='voteArea'>

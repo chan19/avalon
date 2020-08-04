@@ -2,19 +2,22 @@ MASTER = (function() {
     return {
         init: function() {
             this.service = SERVICE;
+			this._attachEvents();
+			this._attachListeners();
             this.start();
         },
         start: function() {
             var that = this;
             this.fetchInitData(function() {
                 that.prepareUI();
+				that.fetchMissionData();
             });
         },
         fetchInitData: function(fn) {
             var that = this;
             this.service.getInitData(function(data) {
                 that.setInitialData(data);
-                fn();
+				fn();
             });
         },
         setInitialData: function(data) {
@@ -24,13 +27,20 @@ MASTER = (function() {
             this.setRound(data.round);
 			this.setMyId(data.profile_id);
         },
+		fetchMissionData: function(){
+			var players = this.getPlayers();
+			this.service.getMissionData(function(data){
+				MissionManager.updateMissionTableUi(players, data);
+			});
+		},
+		addMission: function(oTeam){
+			
+		},
         prepareUI: function() {
             PlayerManager.createPlayers(this.getPlayers());
 			PlayerManager.markDecider(this.getRound().decider);
 			PlayerManager.markLeader(this.getRound().leader);
 			PlayerManager.displayMyRole(this.getMyId());
-			MissionManager.updateMissionTableUi(this.getPlayers(), this.service.getMissionData());
-		
         },
         setRole: function(s) {
             this._role = s;
@@ -56,6 +66,12 @@ MASTER = (function() {
         getRound: function() {
             return this._round;
         },
+		setMissionNumber: function(n){
+			this._missionNumber = n;
+		},
+		getMissionNumber: function(){
+			return this._missionNumber;
+		},
         setLeader: function(i) {
             this._leader = i;
         },
@@ -74,6 +90,53 @@ MASTER = (function() {
         getDecider: function() {
             return this.getDecider;
         },
+		onPick: function(){
+			var a = PlayerManager.getTeamData();
+			this.showInfo("You picked", a.name.join(", "));
+			this.addMission(a);
+		},
+		showInfo: function(sLabel, sText){
+			var s = "<div class='infoTextLabel'>"+ sLabel + "</div><div class ='infoTextContent'>" + sText + "</div>";
+			jQuery(".controlPane").hide();
+			jQuery("#infoControl").show().html(s);
+		},
+		showControl: function(sId){
+			jQuery(".controlPane").hide();
+			jQuery("#"+sId).show();
+		},
+		enableButton: function(sId){
+			jQuery("#" + sId).addClass("enable");
+		},
+		disableButton: function(sId){
+			jQuery("#" + sId).removeClass("enable");
+		},
+		_attachEvents: function(){
+			var that = this;
+			jQuery("#pick").click(function(){
+				that.onPick();
+			});
+			jQuery("#succeed").on("click", function(){
+				
+			});
+			jQuery("#fail").on("click", function(){
+				
+			});
+			jQuery("#approve").on("click", function(){
+				
+			});
+			jQuery("#reject").on("click", function(){
+				
+			});
+		},
+		_attachListeners: function(){
+			var that = this;
+			PlayerManager.listenTo("onTeamFull", function(){
+				that.enableButton("pick");
+			});
+			PlayerManager.listenTo("onTeamUndone", function(){
+				that.disableButton("pick");
+			});
+		},
     };
 }
 )();

@@ -71,7 +71,7 @@
     color: #FFEB3B;
 }
 
-.player .deciderIcon {
+.player .decidericon {
     position: absolute;
     height: 25px;
     width: 25px;
@@ -86,7 +86,7 @@
     left: 5px;
 }
 
-.player .leaderIcon {
+.player .leadericon {
     display: none;
     position: absolute;
     height: 25px;
@@ -101,6 +101,6 @@
     left: 5px;
 }
 
-.player.isLeader .leaderIcon, .player.isDecider .deciderIcon {
+.player.isLeader .leadericon, .player.isDecider .decidericon {
     display: block;
 }

@@ -54,6 +54,9 @@ body {
     BORDER-RADIUS: 4PX;
     background: #2196F3;
     color: #ffffff;
+    transition: 100ms linear all;
+    opacity:0.5;
+    cursor: not-allowed;
 }
 
 .controlLabel {
@@ -62,9 +65,24 @@ body {
     font-size: medium;
     color: #171717;
 }
-
-.controlbutton:hover {
-    transition: 100ms linear all;
+.infoTextLabel {
+    display: inline-block;
+    margin: 3px 2px 0px 8px;
+    font-size: small;
+    color: #171717;
+}
+.infoTextContent {
+    display: inline-block;
+    margin: 4px 10px 4px 4px;
+    font-size: medium;
+    color: #505050;
+    font-weight: bold;
+}
+.controlbutton.enable{
+	opacity:1;
+	cursor:pointer;
+}
+.controlbutton.enable:hover {
     transform: scale(1.1);
 }
 

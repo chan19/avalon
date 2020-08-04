@@ -4,7 +4,15 @@ var Player = function(oConfig) {
 Player.prototype = {
     init: function(oConfig) {
         this.setData(oConfig.data);
+		this.setHandler(oConfig.press);
     },
+	_onPress: function(){
+		
+	},
+	_isActive: false,
+	setHandler: function(fn){
+		this._onPress = fn || function(){};
+	},
     setData: function(data) {
         this.setId(data.id);
         this.setName(data.name);
@@ -66,6 +74,7 @@ Player.prototype = {
 		var that = this;
 		this._node.on("click", function(){
 			that.toggleIsActive();
+			that._onPress();
 		});
     },
     _createNode: function() {
@@ -85,7 +94,7 @@ Player.prototype = {
 		
 	},
     getHtml: function(oData) {
-        var sRoleClass = "role" + ROLE_CONFIG[oData.role];
+        var sRoleClass = "role" + ROLE_CONFIG[oData.role].toLowerCase();
         return "<div class='player " + sRoleClass + "' id='_player" + oData.id + "'>" + "<div class='playerRoleIcon'></div><div class='playerName'>" + oData.name + "</div>" +
 		"<div class='roleText' style='display:none'>" + ROLE_CONFIG[oData.role]+ "</div><div class='decidericon'></div><div class='leadericon'></div>";
     },
