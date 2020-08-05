@@ -154,6 +154,16 @@ MASTER = (function() {
         getDecider: function() {
             return this._decider;
         },
+		beginRound: function(){
+			PlayerManager.resetTeam();
+			if(this.getMyId() == this.getLeader()){
+				this.showPickControl();
+				PlayerManager.setArenaActive(true);
+			} else {
+				PlayerManager.setArenaActive(false);
+				this.fetchTeam();
+			}
+		},
 		fetchTeam: function(){
 			var that = this;
 			var players = this.getPlayers();
@@ -170,19 +180,14 @@ MASTER = (function() {
 			this.showInfo("Waiting for mission votes by ", PlayerManager.getTeamData().name.join(", "));
 			this.service.getMissionVotes(function(data){
 				MissionManager.updateMissionTableUi(players, data);
+				if(data[that.getMissionNumber()].state == 0){
+					that.showFailure("Mission Failed");
+				} else {
+					that.showSuccess("Mission Succeeded");
+				}
 				that.moveToNextMission(true);
 				that.beginRound();					
 			});	
-		},
-		beginRound: function(){
-			PlayerManager.resetTeam();
-			if(this.getMyId() == this.getLeader()){
-				this.showPickControl();
-				PlayerManager.setArenaActive(true);
-			} else {
-				PlayerManager.setArenaActive(false);
-				this.fetchTeam();
-			}
 		},
 		onTeamVoteResult: function(aData){
 			var oRound = aData[this.getMissionNumber()].rounds[this.getRound()];
@@ -196,6 +201,7 @@ MASTER = (function() {
 				}
 			} else {
 				//todo: if fifth round is rejected;
+				this.showFailure("Team rejected");
 				this.moveToNextRound();
 				this.beginRound();
 			}
@@ -222,6 +228,11 @@ MASTER = (function() {
 			var players = this.getPlayers();
 			this.showInfo("Waiting for Mission result", "");
 			this.service.saveMyMissionVote(bVote, function(data){
+				if(data[that.getMissionNumber()].state == 0){
+					that.showFailure("Mission Failed");
+				} else {
+					that.showSuccess("Mission Succeeded");
+				}
 				MissionManager.updateMissionTableUi(players, data);
 				that.moveToNextMission(true);
 				that.beginRound();					
@@ -295,6 +306,18 @@ MASTER = (function() {
 			PlayerManager.listenTo("onTeamUndone", function(){
 				that.disableButton("pick");
 			});
+		},
+		showSuccess: function(sMsg){
+			jQuery("#messageToast").html(sMsg).removeClass("fail").show().addClass("success");
+			setTimeout(function(){
+				jQuery("#messageToast").hide();
+			}, 3000);
+		},
+		showFailure: function(sMsg){
+			jQuery("#messageToast").html(sMsg).removeClass("success").show().addClass("fail");
+			setTimeout(function(){
+				jQuery("#messageToast").hide();
+			}, 3000);
 		}
     };
 }
