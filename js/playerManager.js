@@ -24,6 +24,7 @@ PlayerManager = (function() {
 			var a;
 			while(a=this._team.pop()){
 				a.setIsActive(false);
+				//a.setEnable(false);
 			}
 		},
 		addToTeam: function(a){

@@ -26,6 +26,7 @@ MASTER = (function() {
             this.setPlayers(data.players);
 			this.setLeader(data.initLeader);
 			this.setDecider(data.initDecider);
+			this._teamLimits = data.missions;
 			this.setTeamLimit(data.missions[0]);
 			this.setMissionNumber(0);
             this.setRound(0);
@@ -86,8 +87,10 @@ MASTER = (function() {
 		moveToNextRound: function(bNewMission){
 			if(bNewMission){
 				this.setRound(0);
+				this.setMissionNumber(this.getMissionNumber() + 1);
 				this.moveToNextLeader();
 				this.moveToNextDecider();
+				this.setTeamLimit(this._teamLimits[this.getMissionNumber()]);
 			} else {
 				this.setRound(this.getRound() + 1);
 				this.moveToNextLeader();
@@ -134,6 +137,9 @@ MASTER = (function() {
 			this._teamLimit = n;
 			PlayerManager.setTeamLimit(n);
 		},
+		getTeamLimits: function(){
+
+		},
 		getTeamLimit: function(){
 			return this._teamLimit;
 		},
@@ -152,14 +158,22 @@ MASTER = (function() {
 		fetchTeam: function(){
 			var that = this;
 			var players = this.getPlayers();
-			this.showInfo(this.getPlayerNameById(this.getLeader()));
-			setTimeout(function(){
-				that.service.fetchTeam(function(data){
-					MissionManager.updateMissionTableUi(players, data);
-					PlayerManager.setTeam(data[that.getMissionNumber()].rounds[that.getRound()].team);
-					that.showTeamVoteControl();				
-				});				
-			}, 4000);
+			this.showInfo("Waiting for the team proposal by ",this.getPlayerNameById(this.getLeader()));
+			this.service.fetchTeam(function(data){
+				MissionManager.updateMissionTableUi(players, data);
+				PlayerManager.setTeam(data[that.getMissionNumber()].rounds[that.getRound()].team);
+				that.showTeamVoteControl();				
+			});		
+		},
+		fetchMissionVotes: function(){
+			var that = this;
+			var players = this.getPlayers();
+			this.showInfo("Waiting for mission votes by ", PlayerManager.getTeamData().name.join(", "));
+			this.service.getMissionVotes(function(data){
+				MissionManager.updateMissionTableUi(players, data);
+				that.moveToNextRound(true);
+				that.beginRound();					
+			});	
 		},
 		beginRound: function(){
 			PlayerManager.resetTeam();
@@ -169,11 +183,26 @@ MASTER = (function() {
 				this.fetchTeam();
 			}
 		},
+		onTeamVoteResult: function(aData){
+			var oRound = aData[this.getMissionNumber()].rounds[this.getRound()];
+			var isApproved =  (!oRound.isPending) && oRound.isApproved;
+			if(isApproved){
+				if(oRound.team.indexOf( this.getMyId()) > -1){
+					// if i am in the team
+					this.showMissionVoteControl(oRound.team);	
+				} else {
+					this.fetchMissionVotes();
+				}
+			} else {
+				//todo: if fifth round is rejected;
+				this.moveToNextRound();
+				this.beginRound();
+			}
+		},
 		onTeamPick: function(){
 			var that = this;
 			var players = this.getPlayers();
 			var a = PlayerManager.getTeamData();
-			//this.showInfo("You picked", a.name.join(", "));
 			this.service.saveTeam({
 				mission: this.getMissionNumber(),
 				team: a.id,
@@ -187,23 +216,34 @@ MASTER = (function() {
 				that.showTeamVoteControl();
 			});
 		},
-		onTeamVote: function(bVote){
+		saveMyMissionVote: function(bVote){
 			var that = this;
 			var players = this.getPlayers();
+			this.showInfo("Waiting for Mission result", "");
+			this.service.saveMyMissionVote(bVote, function(data){
+				MissionManager.updateMissionTableUi(players, data);
+				that.moveToNextRound(true);
+				that.beginRound();					
+			});	
+		},
+		saveMyTeamVote: function(bVote){
+			var that = this;
+			var players = this.getPlayers();
+			this.showInfo("Waiting for others votes", "");
 			this.service.saveMyTeamVote({
 				mission: this.getMissionNumber(),
 				round: this.getRound(),
 				vote: bVote
 			}, function(data){
 				MissionManager.updateMissionTableUi(players, data);
-				that.moveToNextRound();
-				that.beginRound();
-				
+				that.onTeamVoteResult(data);		
 			});
 		},
-		showInfo: function(sText){
+		showInfo: function(sLabel, sText){
 			jQuery(".controlPane").hide();
-			jQuery("#infoControl").show().find(".infoTextContent").html(sText);
+			var infoControl = jQuery("#infoControl").show();
+			infoControl.find(".infoTextLabel").html(sLabel);
+			infoControl.find(".infoTextContent").html(sText);
 		},
 		showTeamVoteControl: function(){
 			var a = PlayerManager.getTeamData().name;
@@ -214,9 +254,10 @@ MASTER = (function() {
 			jQuery(".controlPane").hide();
 			jQuery("#pickControl").show().find(".infoTextContent").html(this.getTeamLimit() + " players");
 		},
-		showControl: function(sId){
+		showMissionVoteControl: function(aTeam){
+			var a = PlayerManager.getTeamData().name;
 			jQuery(".controlPane").hide();
-			jQuery("#"+sId).show();
+			jQuery("#missionControl").show().find(".infoTextContent").html(a.join(", "));
 		},
 		enableButton: function(sId){
 			jQuery("#" + sId).removeClass("disable");
@@ -233,16 +274,16 @@ MASTER = (function() {
 				}
 			});
 			jQuery("#succeed").on("click", function(){
-				
+				that.saveMyMissionVote(true);
 			});
 			jQuery("#fail").on("click", function(){
-				
+				that.saveMyMissionVote(false);
 			});
 			jQuery("#approve").on("click", function(){
-				that.onTeamVote(true);
+				that.saveMyTeamVote(true);
 			});
 			jQuery("#reject").on("click", function(){
-				that.onTeamVote(false);
+				that.saveMyTeamVote(false);
 			});
 		},
 		_attachListeners: function(){

@@ -54,7 +54,7 @@ body {
     text-align: center;
     text-transform: uppercase;
     padding: 0px 14px;
-    margin: 4px 10px;
+    margin: 4px 4px;
     cursor: pointer;
     BORDER: none;
     LINE-HEIGHT: 30px;
@@ -98,7 +98,7 @@ body {
 
 .infoTextContent {
     display: inline-block;
-    margin: 4px 10px 4px 4px;
+    margin: 4px 4px 4px 4px;
     font-size: medium;
     color: #505050;
     font-weight: bold;
@@ -156,8 +156,9 @@ body {
     color: #4e4e4e;
     font-size: 12px;
 }
-.busyIndicator{
-	display: inline-block;
-	height: 40px;
-	vertical-align: middle;
+
+.busyIndicator {
+    display: inline-block;
+    height: 40px;
+    vertical-align: middle;
 }

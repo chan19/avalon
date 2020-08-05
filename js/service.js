@@ -1,7 +1,7 @@
 SERVICE = (function() {
-var roundNumber = 0;
-var missionNumber = 0;
-var curLeader;
+var ROUND_NUMBER = 0;
+var MISSION_NUMBER = 0;
+var CUR_LEADER;
 function getDummyVotes(bVote){
 	var approve = [];
 	var reject = [];
@@ -32,7 +32,7 @@ function getDummyTeam(){
 	
 	var playerCount = gameData.players.length;
 
-	var limit = missionData[missionNumber].limit;
+	var limit = missionData[MISSION_NUMBER].limit;
 	while(team.length < limit){
 		k = Math.floor(Math.random() * 100) % (playerCount);
 		if(team.indexOf(k) == -1){
@@ -40,14 +40,30 @@ function getDummyTeam(){
 		}
 	}
 	return {
-		missionNumber: missionNumber,
-		round: roundNumber,
+		missionNumber: MISSION_NUMBER,
+		round: ROUND_NUMBER,
 		team: team,
-		leader: curLeader,
+		leader: CUR_LEADER,
 		approved: [],
 		reject: [],
-		isApproved: false
+		isPending: true,
+		isApproved: false,
 	};
+}
+function getClone(oData){
+	var t = oData;
+	if(oData instanceof Array){
+		t = [];
+		oData.forEach(function(o){
+			t.push(getClone(o));
+		});
+	} else if(oData instanceof Object){
+		t = {};
+		for(var each in oData){
+			t[each] = getClone(oData[each]);
+		}
+	}
+	return t;
 }
  var gameData = {
                 role: "MERLIN",
@@ -95,7 +111,7 @@ function getDummyTeam(){
 				initDecider: 4,
 				missions: [3,3,4,4,5]
 	};
-	curLeader = gameData.initLeader = Math.floor(Math.random() * 100) % gameData.players.length;
+	CUR_LEADER = gameData.initLeader = Math.floor(Math.random() * 100) % gameData.players.length;
 	gameData.initDecider = (gameData.initLeader + 4) % gameData.players.length;
 	console.log(gameData.initLeader, gameData.initDecider);
 	var missionData2 =[{
@@ -206,30 +222,59 @@ function getDummyTeam(){
 				fn(missionData);
 		},
 		saveTeam:function(oData, fn){
+			oData = getClone(oData);
 			var m = oData.mission;
 			var r = oData.round;
+			oData.isApproved = false;
+			oData.isPending = true;
 			missionData[m] = missionData[m] || {
 				missionNumber: m,
 				state: 0, //-1 pending, 0 fail 1 success
 				rounds: []
 			};
 			missionData[m].rounds[r] = oData;
-			curLeader = (curLeader+1) % ( gameData.players.length);
-			roundNumber = (roundNumber +1 ) % 5;
-			if(roundNumber == 0){
-				missionNumber ++;
+			CUR_LEADER = (CUR_LEADER+1) % ( gameData.players.length);
+			ROUND_NUMBER = (ROUND_NUMBER +1 ) % 5;
+			if(ROUND_NUMBER == 0){
+				MISSION_NUMBER ++;
 			}
 			fn(missionData);
 			
 		},
 		saveMyTeamVote: function(oData, fn){
+			oData = getClone(oData);
 			var m = oData.mission;
 			var r = oData.round;
 			var oDummy = getDummyVotes( oData.vote);
 			missionData[m].rounds[r].approved = oDummy.approve;
 			missionData[m].rounds[r].reject = oDummy.reject;
-			missionData[m].rounds[r].isApproved = true;
-			fn(missionData);
+			missionData[m].rounds[r].isApproved = oDummy.approve.length > oDummy.reject.length;
+			missionData[m].rounds[r].isPending = false;
+			setTimeout(function(){
+				fn(missionData);
+			}, 3000);
+		},
+		getMissionVotes: function(fn){
+			var oMission = missionData[MISSION_NUMBER];
+			var oRound = missionData[ROUND_NUMBER];
+			oMission.state = Math.floor(Math.random() * 100) % 2; // randomly succeed or fail;
+			CUR_LEADER = (CUR_LEADER+1) % ( gameData.players.length);
+			ROUND_NUMBER = 0;
+			MISSION_NUMBER ++;
+			setTimeout(function(){
+				fn(missionData);
+			}, 4000);
+		},
+		saveMyMissionVote: function(bVote, fn){
+			var oMission = missionData[MISSION_NUMBER];
+			var oRound = missionData[ROUND_NUMBER];
+			oMission.state = (Math.floor(Math.random() * 100) % 2) && bVote; // randomly succeed or fail;
+			CUR_LEADER = (CUR_LEADER+1) % ( gameData.players.length);
+			ROUND_NUMBER = 0;
+			MISSION_NUMBER ++;
+			setTimeout(function(){
+				fn(missionData);
+			}, 4000);
 		},
 		fetchTeam: function(fn){
 			var dummyData = getDummyTeam();
@@ -237,12 +282,14 @@ function getDummyTeam(){
 			var r = dummyData.round;
 			missionData[m].rounds[r] = dummyData;
 			
-			curLeader = (curLeader+1) % ( gameData.players.length);
-			roundNumber = (roundNumber +1 ) % 5;
-			if(roundNumber == 0){
-				missionNumber ++;
+			CUR_LEADER = (CUR_LEADER+1) % ( gameData.players.length);
+			ROUND_NUMBER = (ROUND_NUMBER +1 ) % 5;
+			if(ROUND_NUMBER == 0){
+				MISSION_NUMBER ++;
 			}
-			fn(missionData);
+			setTimeout(function(){
+				fn(missionData);
+			}, 4000);
 		}
     }
 }
