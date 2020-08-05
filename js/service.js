@@ -258,7 +258,7 @@ function getClone(oData){
 			var oMission = missionData[MISSION_NUMBER];
 			var oRound = missionData[ROUND_NUMBER];
 			oMission.state = Math.floor(Math.random() * 100) % 2; // randomly succeed or fail;
-			CUR_LEADER = (CUR_LEADER+1) % ( gameData.players.length);
+			//CUR_LEADER = (CUR_LEADER+1) % ( gameData.players.length);
 			ROUND_NUMBER = 0;
 			MISSION_NUMBER ++;
 			setTimeout(function(){
@@ -269,7 +269,7 @@ function getClone(oData){
 			var oMission = missionData[MISSION_NUMBER];
 			var oRound = missionData[ROUND_NUMBER];
 			oMission.state = (Math.floor(Math.random() * 100) % 2) && bVote; // randomly succeed or fail;
-			CUR_LEADER = (CUR_LEADER+1) % ( gameData.players.length);
+			//CUR_LEADER = (CUR_LEADER+1) % ( gameData.players.length);
 			ROUND_NUMBER = 0;
 			MISSION_NUMBER ++;
 			setTimeout(function(){
