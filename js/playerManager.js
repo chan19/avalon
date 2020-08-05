@@ -20,6 +20,12 @@ PlayerManager = (function() {
         },
 		_team: [],
 		_teamLimit: 3,
+		setArenaActive: function(bActive){
+			jQuery("#arena")[bActive? "addClass" : "removeClass"]("isActive");
+			this._playerNodes.forEach(function(o){
+				o.setEnable(bActive);
+			});
+		},
 		resetTeam: function(){
 			var a;
 			while(a=this._team.pop()){

@@ -10,6 +10,7 @@ Player.prototype = {
 		
 	},
 	_isActive: false,
+	_isEnable: false,
 	setHandler: function(fn){
 		this._onPress = fn || function(){};
 	},
@@ -60,6 +61,12 @@ Player.prototype = {
 	getIsActive: function(){
 		return this._isActive;
 	},
+	setEnable: function(bEnable){
+		this._isEnable = bEnable;
+	},
+	isEnable: function(){
+		return this._isEnable;
+	},
 	setShowRoleText: function(){
 		this._node.find(".roleText").show();
 	},
@@ -73,8 +80,10 @@ Player.prototype = {
     _attachEvents: function() {
 		var that = this;
 		this._node.on("mousedown", function(){
-			that.toggleIsActive();
-			that._onPress();
+			if(that.isEnable()){
+				that.toggleIsActive();
+				that._onPress();
+			}
 		});
     },
     _createNode: function() {

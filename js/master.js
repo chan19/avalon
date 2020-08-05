@@ -178,7 +178,9 @@ MASTER = (function() {
 			PlayerManager.resetTeam();
 			if(this.getMyId() == this.getLeader()){
 				this.showPickControl();
+				PlayerManager.setArenaActive(true);
 			} else {
+				PlayerManager.setArenaActive(false);
 				this.fetchTeam();
 			}
 		},
