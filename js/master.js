@@ -82,15 +82,14 @@ MASTER = (function() {
         },
 		moveToNextMission: function(){
 			this.setMissionNumber(this.getMissionNumber() + 1);
+			this.setTeamLimit(this._teamLimits[this.getMissionNumber()]);
 			this.moveToNextRound(true);
 		},
 		moveToNextRound: function(bNewMission){
 			if(bNewMission){
 				this.setRound(0);
-				this.setMissionNumber(this.getMissionNumber() + 1);
 				this.moveToNextLeader();
 				this.moveToNextDecider();
-				this.setTeamLimit(this._teamLimits[this.getMissionNumber()]);
 			} else {
 				this.setRound(this.getRound() + 1);
 				this.moveToNextLeader();
@@ -171,7 +170,7 @@ MASTER = (function() {
 			this.showInfo("Waiting for mission votes by ", PlayerManager.getTeamData().name.join(", "));
 			this.service.getMissionVotes(function(data){
 				MissionManager.updateMissionTableUi(players, data);
-				that.moveToNextRound(true);
+				that.moveToNextMission(true);
 				that.beginRound();					
 			});	
 		},
@@ -222,7 +221,7 @@ MASTER = (function() {
 			this.showInfo("Waiting for Mission result", "");
 			this.service.saveMyMissionVote(bVote, function(data){
 				MissionManager.updateMissionTableUi(players, data);
-				that.moveToNextRound(true);
+				that.moveToNextMission(true);
 				that.beginRound();					
 			});	
 		},

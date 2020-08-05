@@ -109,7 +109,7 @@ function getClone(oData){
                 }],
 				initLeader: 0,
 				initDecider: 4,
-				missions: [3,3,4,4,5]
+				missions: [3,4,4,5,4]
 	};
 	CUR_LEADER = gameData.initLeader = Math.floor(Math.random() * 100) % gameData.players.length;
 	gameData.initDecider = (gameData.initLeader + 4) % gameData.players.length;
