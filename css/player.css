@@ -6,21 +6,15 @@
     position: relative;
     border: 1px solid #cecece;
     border-radius: 10px;
-    cursor: pointer;
+    cursor: default;
     color: #484848;
     transition: 200ms linear transform;
     background: white;
     box-shadow: 1px 1px 6px 0px #ababab;
 }
 
-.player.isActive{
-    background: #4CAF50;
-    color: white;
-    border: 1px solid #4CAF50;
-}
-
-.player:hover {
-    transform: scale(1.1)
+#arena.isActive .player {
+    cursor: pointer;
 }
 
 .player .playerRoleIcon {
@@ -51,7 +45,6 @@
 .player .playerName {
     text-align: center;
     font-weight: 400;
-    cursor: pointer;
     margin-top: 12px;
     font-size: small;
     text-transform: capitalize;
@@ -67,23 +60,19 @@
     width: 100%;
 }
 
-.player.isActive .roleText{
-    color: #FFEB3B;
-}
-
 .player .decidericon {
     position: absolute;
-    height: 25px;
-    width: 25px;
+    height: 23px;
+    width: 22px;
     background-image: url(../icons/decider.png);
     display: none;
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     top: -12px;
-    left: 42px;
     top: 5px;
-    left: 5px;
+    right: 5px;
+    /* transform: scaleX(-1); */
 }
 
 .player .leadericon {
@@ -95,12 +84,29 @@
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    top: -12px;
-    left: 42px;
     top: 5px;
     left: 5px;
 }
 
 .player.isLeader .leadericon, .player.isDecider .decidericon {
     display: block;
+}
+
+#arena.isActive .player:hover {
+    transform: scale(1.1)
+}
+
+#arena.isActive .player.isActive {
+    background: #4CAF50;
+    border: 1px solid #4CAF50;
+}
+
+.player.isActive {
+    background: black;
+    color: white;
+    border: 1px solid #000000;
+}
+
+.player.isActive .roleText {
+    color: #FFEB3B;
 }

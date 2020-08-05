@@ -99,8 +99,8 @@ body {
 .infoTextContent {
     display: inline-block;
     margin: 4px 4px 4px 4px;
-    font-size: medium;
-    color: #505050;
+    font-size: small;
+    color: #383838;
     font-weight: bold;
 }
 
@@ -123,7 +123,8 @@ body {
 
 #controlArea .controlPane {
     line-height: 30px;
-    margin-left: 150px;
+    margin-left: 10px;
+    height: 40px;
 }
 
 #voteArea {
