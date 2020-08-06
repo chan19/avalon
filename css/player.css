@@ -100,11 +100,16 @@
     background: #4CAF50;
     border: 1px solid #4CAF50;
 }
-
+#arena .player.isActive .decidericon{
+    background-image: url(../icons/deciderW.png);
+}
+#arena .player.isActive .leadericon{
+    background-image: url(../icons/leaderW.png);
+}
 .player.isActive {
-    background: black;
+    background: #2f2f2f;
     color: white;
-    border: 1px solid #000000;
+    border: 1px solid #2f2f2f;
 }
 
 .player.isActive .roleText {
