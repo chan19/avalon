@@ -5,14 +5,13 @@
 
 .dialog {
     position: fixed;
-    height: 50%;
     width: 50%;
     background: #ffffff;
     left: 0;
     right: 0;
-    top: 0;
-    bottom: 0;
     margin: auto;
+    top: 20%;
+    border-top: 25px solid #03A9F4;
 }
 
 #blocker {
@@ -22,23 +21,4 @@
     height: 100%;
     width: 100%;
     background: #000000ad;
-}
-
-.closeButton {
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    height: 30px;
-    width: 30px;
-    background-color: #E91E63;
-    border-radius: 50%;
-    color: white;
-    line-height: 30px;
-    text-align: center;
-    border: none;
-    outline: none;
-	cursor:pointer;
-}
-.closeButton:hover {
-   opacity: 0.8;
 }
