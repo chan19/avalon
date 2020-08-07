@@ -4,6 +4,7 @@ var Player = function(oConfig) {
 Player.prototype = {
     init: function(oConfig) {
         this.setData(oConfig.data);
+		this.setEnable(oConfig.enable ? true : false);
 		this.setHandler(oConfig.press);
     },
 	_onPress: function(){
@@ -86,6 +87,9 @@ Player.prototype = {
 			}
 		});
     },
+	render: function(sId){
+		jQuery("#"+sId).append(this.getNode());
+	},
     _createNode: function() {
         var oData = this.getData();
         var sHtml = this.getHtml(oData);

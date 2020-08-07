@@ -13,7 +13,7 @@
     box-shadow: 1px 1px 6px 0px #ababab;
 }
 
-#arena.isActive .player {
+.playerContainer.isActive .player {
     cursor: pointer;
 }
 
@@ -41,7 +41,23 @@
 .player.roleperceival .playerRoleIcon {
     background-image: url(../icons/perceival.png);
 }
+.player.rolemordred .playerRoleIcon {
+    background-image: url(../icons/mordred.png);
+}
 
+.player.roletriston .playerRoleIcon {
+    background-image: url(../icons/triston.png);
+}
+
+.player.roleisolde .playerRoleIcon {
+    background-image: url(../icons/isolde.png);
+}
+.player.roleoberon .playerRoleIcon {
+    background-image: url(../icons/oberon.png);
+}
+.player.rolemorgana .playerRoleIcon {
+    background-image: url(../icons/merlin.png);
+}
 .player .playerName {
     text-align: center;
     font-weight: 400;
@@ -92,18 +108,18 @@
     display: block;
 }
 
-#arena.isActive .player:hover {
+.playerContainer.isActive .player:hover {
     transform: scale(1.1)
 }
 
-#arena.isActive .player.isActive {
+.playerContainer.isActive .player.isActive {
     background: #4CAF50;
     border: 1px solid #4CAF50;
 }
-#arena .player.isActive .decidericon{
+.playerContainer .player.isActive .decidericon{
     background-image: url(../icons/deciderW.png);
 }
-#arena .player.isActive .leadericon{
+.playerContainer .player.isActive .leadericon{
     background-image: url(../icons/leaderW.png);
 }
 .player.isActive {

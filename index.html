@@ -9,13 +9,15 @@
 		<script src='js/player.js'></script>
 		<script src='js/playerManager.js'></script>
 		<script src='js/missionManager.js'></script>
+		<script src='js/newGameManager.js'></script>
 		<script src='js/service.js'></script>
 		<script src='js/master.js'></script>
 		<link href='css/main.css' rel='stylesheet'></link>
 		<link href='css/player.css' rel='stylesheet'></link>
 		<link href='css/mission.css' rel='stylesheet'></link>
+		<link href='css/gamemanager.css' rel='stylesheet'></link>
 		<script>
-		var ROLE_CONFIG = ["RESISTANCE", "MERLIN", "SPY", "PERCEIVAL", "MORGANA", "TRISTON", "ISOLDE"];
+		var ROLE_CONFIG = ["RESISTANCE", "MERLIN", "SPY", "PERCEIVAL", "MORGANA", "TRISTON", "ISOLDE", "MORDRED", "OBERON"];
 			jQuery(document).ready(function(){
 				MASTER.init();
 			
@@ -30,7 +32,7 @@
 			<button class='controlbutton enable' id='newgame'>NEW GAME</button>
 		</div>
 		
-		<div id='arena'></div>
+		<div id='arena' class='playerContainer'></div>
 		<div id='myRole'>
 		
 		</div>
@@ -68,6 +70,29 @@
 			
 		</div>
 		<div id='messageToast' class='messageToast'>
+		</div>
+		<div id='currentStatus' class='statusCard'>
+			<div class = 'missionStatusPane'>
+				<div class='statusCardLabel'></div>
+				<div class='statusCardLabel'></div>
+			</div>
+			<div class = 'missionStatusPane'>
+				<div class='statusCardLabel'></div>
+				<div class='statusCardLabel'></div>
+			</div>
+		</div>
+		<div id='blocker' style='display:none'></div>
+		<div id='newGameDialog' class='dialog' style='display:none'>
+			<button class='closeButton' id='close'>X</button>
+			<div class='configPane'>
+				<div class='configPaneLabel'>Player Count </div>
+				<input type="range" id="playerCount" min="0" max="10">
+				<div class='configPaneValue'>10</div>
+			</div>
+			<div id='rolesPane' class='rolesPane playerContainer isActive'>
+			
+			</div>
+			
 		</div>
 	</body>
 

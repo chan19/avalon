@@ -4,6 +4,7 @@ MASTER = (function() {
             this.service = SERVICE;
 			this._attachEvents();
 			this._attachListeners();
+			NewGameManager.init();
             this.start();
         },
         start: function() {
@@ -296,6 +297,9 @@ MASTER = (function() {
 			});
 			jQuery("#reject").on("click", function(){
 				that.saveMyTeamVote(false);
+			});
+			jQuery("#newgame").on("click", function(){
+				NewGameManager.open();
 			});
 		},
 		_attachListeners: function(){
