@@ -20,7 +20,7 @@ NewGameManager = (function() {
         },
 		_attachEvents: function(){
 			var that = this;
-			jQuery("#close").click(function(){
+			jQuery("#cancel").click(function(){
 				that.close();
 			});
 		},
