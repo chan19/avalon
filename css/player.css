@@ -42,18 +42,18 @@
     background-image: url(../icons/perceival.png);
 }
 .player.rolemordred .playerRoleIcon {
-    background-image: url(../icons/mordred.png);
+    background-image: url(../icons/mordred.PNG);
 }
 
 .player.roletriston .playerRoleIcon {
-    background-image: url(../icons/triston.png);
+    background-image: url(../icons/triston.PNG);
 }
 
 .player.roleisolde .playerRoleIcon {
     background-image: url(../icons/isolde.png);
 }
 .player.roleoberon .playerRoleIcon {
-    background-image: url(../icons/oberon.png);
+    background-image: url(../icons/oberon.PNG);
 }
 .player.rolemorgana .playerRoleIcon {
     background-image: url(../icons/merlin.png);
