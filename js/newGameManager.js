@@ -1,10 +1,12 @@
 NewGameManager = (function() {
     return {
 		init: function(){
-			this.renderPlayers();
+			this.renderRoles();
 			this._attachEvents();
 		},
-        renderPlayers: function(aNode) {
+		_roles: [],
+        renderRoles: function(aNode) {
+			var aRole = [];
             var container = jQuery("#rolesPane");
 			ROLE_CONFIG.forEach(function(s, i){
 				var a = new Player({
@@ -15,8 +17,10 @@ NewGameManager = (function() {
 					},
 					enable: true
 				});
-				 container.append(a.getNode());
+				container.append(a.getNode());
+				aRole.push(a);
 			});
+			this._roles = aRole;
         },
 		_attachEvents: function(){
 			var that = this;
